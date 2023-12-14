@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize")
 const UserModel = require("../models/userModel")
-
+const { setUsers } = require("./setDataSample")
 const sequelize = new Sequelize("projet_mangas", "root", "", {
   host: "localhost",
   dialect: "mariadb",
@@ -12,9 +12,7 @@ const User = UserModel(sequelize, DataTypes)
 sequelize
   .sync({ force: true })
   .then(async () => {
-    // await setRoles(Role)
     await setUsers(User)
-    // await setReview(Review)
   })
   .catch((error) => {
     console.log(error)
