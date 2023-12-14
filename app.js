@@ -11,8 +11,11 @@ app.get("/", (req, res) => {
 })
 
 const userRouter = require("./routes/userRoutes")
+const mangaRouter = require("./routes/mangaRoutes")
+const commentRouter = require("./routes/commentRoutes")
 
 app.use("/api/users", userRouter)
+app.use("/api/mangas", mangaRouter)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
