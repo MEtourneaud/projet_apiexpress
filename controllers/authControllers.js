@@ -1,7 +1,7 @@
 const { User, Role } = require("../db/sequelizeSetup")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-const SECRET_KEY = require("../configs/tokenData")
+const SECRET_KEY = require("../config/tokenData")
 
 const rolesHierarchy = {
   edit: ["edit"],
