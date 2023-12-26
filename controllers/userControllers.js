@@ -60,6 +60,7 @@ const updateUser = (req, res) => {
 
             // On empêche l'utilisateur de mettre à jour son username
             req.body.username = result.username
+
             return result.update(req.body).then(() => {
               res
                 .status(201)

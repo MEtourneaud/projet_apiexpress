@@ -15,4 +15,12 @@ const setUsers = (User) => {
   )
 }
 
-module.exports = { setUsers }
+const setRoles = (Role) => {
+  return Promise.all([
+    Role.create({ label: "superadmin" }),
+    Role.create({ label: "admin" }),
+    Role.create({ label: "edit" }),
+  ])
+}
+
+module.exports = { setUsers, setRoles }

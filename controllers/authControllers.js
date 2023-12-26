@@ -17,25 +17,19 @@ const login = (req, res) => {
         return res.status(404).json({ message: `Le nom d'utilisateur n'existe pas.` })
       }
 
-      bcrypt
-        .compare(req.body.password, result.password)
-        .then((isValid) => {
-          if (!isValid) {
-            return res.status(401).json({ message: `Le mot de passe n'est pas valide.` })
-          }
-          const token = jwt.sign(
-            {
-              data: result.username,
-            },
-            SECRET_KEY,
-            { expiresIn: "10h" }
-          )
-
-          res.json({ message: `Login réussi`, data: token })
-        })
-        .catch((error) => {
-          console.log(error.message)
-        })
+      return bcrypt.compare(req.body.password, result.password).then((isValid) => {
+        if (!isValid) {
+          return res.status(401).json({ message: `Le mot de passe n'est pas valide.` })
+        }
+        const token = jwt.sign(
+          {
+            data: result.username,
+          },
+          SECRET_KEY,
+          { expiresIn: "10h" }
+        )
+        res.json({ message: `Login réussi`, data: token })
+      })
     })
     .catch((error) => {
       res.status(500).json({ data: error.message })
@@ -48,7 +42,6 @@ const protect = (req, res, next) => {
   }
 
   const token = req.headers.authorization.split(" ")[1]
-
   if (token) {
     try {
       const decoded = jwt.verify(token, SECRET_KEY)
