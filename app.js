@@ -18,6 +18,8 @@ app.use("/api/users", userRouter)
 app.use("/api/mangas", mangaRouter)
 app.use("/api/comments", commentRouter)
 
+app.use("/images", express.static(__dirname + "/images"))
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

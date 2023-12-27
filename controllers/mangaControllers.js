@@ -1,4 +1,4 @@
-const { UniqueConstraintError, ValidationError } = require("sequelize")
+const { UniqueConstraintError, ValidationError, QueryTypes } = require("sequelize")
 const { Manga, User, Comment, sequelize } = require("../db/sequelizeSetup")
 
 const findAllMangas = (req, res) => {
@@ -11,19 +11,21 @@ const findAllMangas = (req, res) => {
     })
 }
 
-// const findAllMangasRawSQL = (req, res) => {
-//   sequelize
-//     .query(
-//       "SELECT name, rating FROM mangas LEFT JOIN comments ON mangas.id = reviews.MangaId",
-//       { type: QueryTypes.SELECT }
-//     )
-//     .then((mangas) => {
-//       res.json(mangas)
-//     })
-//     .catch((error) => {
-//       res.status(500).json(error.message)
-//     })
-// }
+const findAllMangasRawSQL = (req, res) => {
+  console.log("Avant la requête SQL :", sequelize)
+  sequelize
+    .query("SELECT title, content FROM mangas LEFT JOIN comments ON mangas.id = comments.MangaId", {
+      type: QueryTypes.SELECT,
+    })
+    .then((mangas) => {
+      console.log("Après la requête SQL :", sequelize)
+      res.json(mangas)
+    })
+    .catch((error) => {
+      console.error("Erreur SQL :", error)
+      res.status(500).json(error.message)
+    })
+}
 
 const findMangaByPk = (req, res) => {
   Manga.findByPk(parseInt(req.params.id))
@@ -111,29 +113,29 @@ const updateManga = (req, res) => {
     })
 }
 
-// const updateMangaWithImg = (req, res) => {
-//   Manga.findByPk(req.params.id)
-//     .then((manga) => {
-//       if (manga) {
-//         return manga
-//           .update({
-//             ...req.body,
-//             imageUrl: `${req.protocol}://${req.get("host")}/uploadedFiles/${req.file.filename}`,
-//           })
-//           .then(() => {
-//             res.status(201).json({ message: "Le manga a bien été mis à jour.", data: manga })
-//           })
-//       } else {
-//         res.status(404).json({ message: `Aucun manga à mettre à jour n'a été trouvé.` })
-//       }
-//     })
-//     .catch((error) => {
-//       if (error instanceof UniqueConstraintError || error instanceof ValidationError) {
-//         return res.status(400).json({ message: error.message })
-//       }
-//       res.status(500).json({ message: "Une erreur est survenue.", data: error.message })
-//     })
-// }
+const updateMangaWithImg = (req, res) => {
+  Manga.findByPk(req.params.id)
+    .then((manga) => {
+      if (manga) {
+        return manga
+          .update({
+            ...req.body,
+            imageUrl: `${req.protocol}://${req.get("host")}/uploadedFiles/${req.file.filename}`,
+          })
+          .then(() => {
+            res.status(201).json({ message: "Le manga a bien été mis à jour.", data: manga })
+          })
+      } else {
+        res.status(404).json({ message: `Aucun manga à mettre à jour n'a été trouvé.` })
+      }
+    })
+    .catch((error) => {
+      if (error instanceof UniqueConstraintError || error instanceof ValidationError) {
+        return res.status(400).json({ message: error.message })
+      }
+      res.status(500).json({ message: "Une erreur est survenue.", data: error.message })
+    })
+}
 
 const deleteManga = (req, res) => {
   Manga.findByPk(req.params.id)
@@ -151,4 +153,13 @@ const deleteManga = (req, res) => {
     })
 }
 
-module.exports = { findAllMangas, findMangaByPk, createManga, updateManga, deleteManga }
+module.exports = {
+  findAllMangas,
+  findAllMangasRawSQL,
+  findMangaByPk,
+  createManga,
+  createMangaWithImg,
+  updateManga,
+  updateMangaWithImg,
+  deleteManga,
+}
