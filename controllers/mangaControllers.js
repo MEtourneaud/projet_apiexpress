@@ -1,8 +1,8 @@
 const { UniqueConstraintError, ValidationError } = require("sequelize")
-const { Manga, User } = require("../db/sequelizeSetup")
+const { Manga, User, Comment, sequelize } = require("../db/sequelizeSetup")
 
 const findAllMangas = (req, res) => {
-  Manga.findAll()
+  Manga.findAll({ include: [Comment, User] })
     .then((mangas) => {
       res.json(mangas)
     })

@@ -37,4 +37,14 @@ const setMangas = (Manga) => {
   )
 }
 
-module.exports = { setUsers, setRoles, setMangas }
+const setStatus = (Status) => {
+  return Promise.all([
+    Status.create({ label: "Completed" }),
+    Status.create({ label: "Reading" }),
+    Status.create({ label: "On hold" }),
+    Status.create({ label: "Dropped" }),
+    Status.create({ label: "Plan to read" }),
+  ])
+}
+
+module.exports = { setUsers, setRoles, setMangas, setStatus }
