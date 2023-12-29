@@ -12,11 +12,11 @@ app.get("/", (req, res) => {
 
 const userRouter = require("./routes/userRoutes")
 const mangaRouter = require("./routes/mangaRoutes")
-const commentRouter = require("./routes/commentRoutes")
+const reviewRouter = require("./routes/reviewRoutes")
 
 app.use("/api/users", userRouter)
 app.use("/api/mangas", mangaRouter)
-app.use("/api/comments", commentRouter)
+app.use("/api/reviews", reviewRouter)
 
 app.use("/images", express.static(__dirname + "/images"))
 

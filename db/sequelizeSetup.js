@@ -3,7 +3,7 @@ const RoleModel = require("../models/roleModel")
 const UserModel = require("../models/userModel")
 const MangaModel = require("../models/mangaModel")
 const StatusModel = require("../models/statusModel")
-const CommentModel = require("../models/commentModel")
+const ReviewModel = require("../models/reviewModel")
 const { setUsers, setRoles, setMangas, setStatus } = require("./setDataSample")
 
 const sequelize = new Sequelize("projet_mangas", "root", "", {
@@ -16,23 +16,23 @@ const Role = RoleModel(sequelize, DataTypes)
 const User = UserModel(sequelize, DataTypes)
 const Manga = MangaModel(sequelize, DataTypes)
 const Status = StatusModel(sequelize, DataTypes)
-const Comment = CommentModel(sequelize, DataTypes)
+const Review = ReviewModel(sequelize, DataTypes)
 
 Role.hasMany(User)
 User.belongsTo(Role)
 
-User.belongsToMany(Manga, { through: Comment })
-Manga.belongsToMany(User, { through: Comment })
+User.belongsToMany(Manga, { through: Review })
+Manga.belongsToMany(User, { through: Review })
 
-Manga.hasMany(Comment, {
+Manga.hasMany(Review, {
   foreignKey: {
     allowNull: false,
   },
 })
-Comment.belongsTo(Manga)
+Review.belongsTo(Manga)
 
-User.hasMany(Comment)
-Comment.belongsTo(User)
+User.hasMany(Review)
+Review.belongsTo(User)
 
 sequelize
   .sync({ force: true })
@@ -51,4 +51,4 @@ sequelize
   .then(() => console.log("La connexion à la base de données a bien été établie."))
   .catch((error) => console.error(`Impossible de se connecter à la base de données ${error}`))
 
-module.exports = { User, Role, Manga, Comment }
+module.exports = { User, Role, Manga, Review }

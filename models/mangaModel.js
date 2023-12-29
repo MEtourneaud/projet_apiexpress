@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      genre: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       volumeNumber: {
         type: DataTypes.INTEGER,
         allowNull: false,

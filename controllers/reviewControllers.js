@@ -1,21 +1,21 @@
 const { ValidationError } = require("sequelize")
-const { Comment, User } = require("../db/sequelizeSetup")
+const { Review, User } = require("../db/sequelizeSetup")
 
-const findAllComments = (req, res) => {
-  Comment.findAll({ include: User })
-    .then((comments) => {
-      res.json(comments)
+const findAllReviews = (req, res) => {
+  Review.findAll({ include: User })
+    .then((reviews) => {
+      res.json(reviews)
     })
     .catch((error) => {
       res.status(500).json(error.message)
     })
 }
 
-const findCommentByPk = (req, res) => {
-  Comment.findByPk(parseInt(req.params.id))
-    .then((comment) => {
-      if (comment) {
-        res.json({ message: "Un commentaire a été trouvé.", data: comment })
+const findReviewByPk = (req, res) => {
+  Review.findByPk(parseInt(req.params.id))
+    .then((review) => {
+      if (review) {
+        res.json({ message: "Un commentaire a été trouvé.", data: review })
       } else {
         res.status(404).json({ message: `Aucun commentaire n'a été trouvé.` })
       }
@@ -25,14 +25,14 @@ const findCommentByPk = (req, res) => {
     })
 }
 
-const createComment = (req, res) => {
+const createReview = (req, res) => {
   User.findOne({ where: { username: req.username } })
     .then((user) => {
       if (!user) {
         return res.status(404).json({ message: `L'utilisateur n'a pas été trouvé.` })
       }
-      return Comment.create({ ...req.body, UserId: user.id }).then((result) => {
-        res.json({ message: `Le commentaire a bien été créé.`, data: result })
+      return Review.create({ ...req.body, UserId: user.id }).then((review) => {
+        res.json({ message: `Le commentaire a bien été créé.`, data: review })
       })
     })
     .catch((error) => {
@@ -43,12 +43,12 @@ const createComment = (req, res) => {
     })
 }
 
-const updateComment = (req, res) => {
-  Comment.findByPk(req.params.id)
-    .then((result) => {
-      if (result) {
-        return result.update(req.body).then(() => {
-          res.status(201).json({ message: "Le commentaire a bien été mis à jour.", data: result })
+const updateReview = (req, res) => {
+  Review.findByPk(req.params.id)
+    .then((review) => {
+      if (review) {
+        return review.update(req.body).then(() => {
+          res.status(201).json({ message: "Le commentaire a bien été mis à jour.", data: review })
         })
       } else {
         res.status(404).json({ message: `Aucun commentaire à mettre à jour n'a été trouvé.` })
@@ -62,12 +62,12 @@ const updateComment = (req, res) => {
     })
 }
 
-const deleteComment = (req, res) => {
-  Comment.findByPk(req.params.id)
-    .then((result) => {
-      if (result) {
-        return result.destroy().then((result) => {
-          res.json({ mesage: `Le commentaire a bien été supprimé.`, data: result })
+const deleteReview = (req, res) => {
+  Review.findByPk(req.params.id)
+    .then((review) => {
+      if (review) {
+        return review.destroy().then((review) => {
+          res.json({ mesage: `Le commentaire a bien été supprimé.`, data: review })
         })
       } else {
         res.status(404).json({ mesage: `Aucun commentaire trouvé.` })
@@ -78,4 +78,4 @@ const deleteComment = (req, res) => {
     })
 }
 
-module.exports = { findAllComments, findCommentByPk, createComment, updateComment, deleteComment }
+module.exports = { findAllReviews, findReviewByPk, createReview, updateReview, deleteReview }
