@@ -1,8 +1,8 @@
 const { UniqueConstraintError, ValidationError, QueryTypes } = require("sequelize")
-const { Manga, User, Comment, sequelize } = require("../db/sequelizeSetup")
+const { Manga, User, Review, sequelize } = require("../db/sequelizeSetup")
 
 const findAllMangas = (req, res) => {
-  Manga.findAll({ include: [Comment, User] })
+  Manga.findAll({ include: [Review, User] })
     .then((mangas) => {
       res.json(mangas)
     })
@@ -14,7 +14,7 @@ const findAllMangas = (req, res) => {
 const findAllMangasRawSQL = (req, res) => {
   console.log("Avant la requête SQL :", sequelize)
   sequelize
-    .query("SELECT title, content FROM mangas LEFT JOIN comments ON mangas.id = comments.MangaId", {
+    .query("SELECT title, rating FROM mangas LEFT JOIN reviews ON mangas.id = reviews.MangaId", {
       type: QueryTypes.SELECT,
     })
     .then((mangas) => {
