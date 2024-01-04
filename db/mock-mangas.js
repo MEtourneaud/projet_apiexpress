@@ -15,7 +15,7 @@ const mangas = [
       "Vinland Saga nous raconte l'histoire d'un jeune Viking, Thorfinn. Ce dernier fait partie de l'équipage d'un chef de guerre du nom d'Askeladd, qui est l'assassin du père de Thorfinn ! Enchainant les combats et les missions dangereuses, Thorfinn s'endurcit et gagne en maturité. Il a un objectif : venger son père de manière loyale...",
     genre: " Action, Aventure, Drame, Historique",
     volumeNumber: "27",
-    imageUrl: "",
+    imageUrl: "http://localhost:3000/images/vinlandSagaCover.jpg",
   },
   {
     title: "Haikyū!!",
