@@ -75,7 +75,7 @@ const createMangaWithImg = (req, res) => {
       const newManga = {
         ...req.body,
         UserId: user.id,
-        imageUrl: `${req.protocol}://${req.get("host")}/uploadedFiles/${req.file.filename}`,
+        imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
       }
 
       Manga.create(newManga)

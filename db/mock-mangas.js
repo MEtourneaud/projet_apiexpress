@@ -1,13 +1,13 @@
 const mangas = [
-  {
-    title: "Gintama",
-    author: "Sorachi Hideaki",
-    synopsis:
-      "Dans un Japon mi-médiéval, mi-futuriste, des extraterrestres, les Amanto débarquent sur Terre. Forts de leur supériorité technologique, ils vont imposer leur loi : tout samouraï devra se défaire de son sabre... C'en est donc fini de l'âme du guerrier samouraï ! C'est sans compter Gintoki Sakata ! Armé de son sabre d'entraînement, il se placera en dernier défenseur du Bushido, le code du samouraï et ne se défera pas de son humour cinglant lors de ses missions délirantes !",
-    genre: " Action, Comédie, Historique",
-    volumeNumber: "77",
-    imageUrl: "",
-  },
+  // {
+  //   title: "Gintama",
+  //   author: "Sorachi Hideaki",
+  //   synopsis:
+  //     "Dans un Japon mi-médiéval, mi-futuriste, des extraterrestres, les Amanto débarquent sur Terre. Forts de leur supériorité technologique, ils vont imposer leur loi : tout samouraï devra se défaire de son sabre... C'en est donc fini de l'âme du guerrier samouraï ! C'est sans compter Gintoki Sakata ! Armé de son sabre d'entraînement, il se placera en dernier défenseur du Bushido, le code du samouraï et ne se défera pas de son humour cinglant lors de ses missions délirantes !",
+  //   genre: " Action, Comédie, Historique",
+  //   volumeNumber: "77",
+  //   imageUrl: "",
+  // },
   {
     title: "Vinland Saga",
     author: "Yukimura Makoto",
