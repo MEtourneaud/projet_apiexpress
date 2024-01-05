@@ -24,7 +24,7 @@ const mangas = [
       "Shôyô Hinata a un talent inné pour le volley-ball malgré sa petite taille. Mais après une défaite contre l'équipe du roi du terrain, Tobio Kageyama, son club de volley-ball au collège perd tous ses membres. Il décide de renouer avec le volley-ball à son entrée au lycée, car cette défaite lui a laissé un goût amer et son but ultime est de surpasser Tobio. Sauf qu'il se rend compte que celui-ci a rejoint le même lycée que lui, et qu'il doit par conséquent jouer dans son équipe ! Et pour redorer le blason de l'équipe de volley-ball du lycée Karasuno, considérée comme les champions déchus, il va falloir que Shôyô et Tobio se reconnaissent comme coéquipiers et non comme rivaux ! Ce qui risque d'être un peu compliqué...",
     genre: "Comédie, Drame, School Life, Sport",
     volumeNumber: "45",
-    imageUrl: "",
+    imageUrl: "http://localhost:3000/images/haikyuuCover.jpg",
   },
   {
     title: "Chainsaw Man",
@@ -33,7 +33,7 @@ const mangas = [
       "Pour rembourser ses dettes, Denji, jeune homme dans la dèche la plus totale, est exploité en tant que Devil Hunter avec son chien-démon-tronçonneuse, Pochita. Mais suite à une cruelle trahison, il voit enfin une possibilité de se tirer des bas-fonds où il croupit ! Devenu surpuissant après sa fusion avec Pochita, Denji est recruté par une organisation et part à la chasse aux démons...",
     genre: " Action, Aventure, Horreur, Mature, Surnaturel",
     volumeNumber: "14",
-    imageUrl: "",
+    imageUrl: "http://localhost:3000/images/chainsawManCover.jpg",
   },
   {
     title: "Yakusoku no Neverland",
@@ -42,7 +42,7 @@ const mangas = [
       "Emma et ses amis, tous orphelins, ont été placés dans un établissement spécialisé lorsqu'ils étaient tout jeune. Bien que leur liberté soit limitée et que les règles soient parfois un peu strictes, ils mènent une vie agréable tous ensemble et la femme qui s'occupe d'eux est généreuse. Cependant, une question anime Emma et tous les autres : pourquoi n'ont-ils pas le droit de sortir de l'orphelinat ?",
     genre: " Aventure, Drame, Horreur, Mystère, Surnaturel",
     volumeNumber: "20",
-    imageUrl: "",
+    imageUrl: "http://localhost:3000/images/yakusokuNoNeverlandCover.jpg",
   },
 ]
 

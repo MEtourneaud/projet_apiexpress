@@ -120,7 +120,7 @@ const updateMangaWithImg = (req, res) => {
         return manga
           .update({
             ...req.body,
-            imageUrl: `${req.protocol}://${req.get("host")}/uploadedFiles/${req.file.filename}`,
+            imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
           })
           .then(() => {
             res.status(201).json({ message: "Le manga a bien été mis à jour.", data: manga })
