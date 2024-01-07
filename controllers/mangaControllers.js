@@ -153,6 +153,40 @@ const deleteManga = (req, res) => {
     })
 }
 
+// const addMangaToProfilUser = (req, res) => {
+//   const { userId, mangaId } = req.body
+
+//   User.findByPk(userId)
+//     .then((user) => {
+//       if (!user) {
+//         return res.status(404).json({ message: `Aucun utilisateur trouvé.` })
+//       }
+
+//       Manga.findByPk(mangaId)
+//         .then((manga) => {
+//           if (!manga) {
+//             return res.status(404).json({ message: `Aucun manga trouvé.` })
+//           }
+
+//           // Créez un enregistrement dans la table Commentaire (si c'est la table de relation)
+//           return Comment.create({ UserId: user.id, MangaId: manga.id })
+//         })
+//         .then(() => {
+//           res
+//             .status(201)
+//             .json({ message: `Le manga a bien été ajouté au profil de l'utilisateur.` })
+//         })
+//         .catch((erreur) => {
+//           const statut =
+//             erreur instanceof UniqueConstraintError || erreur instanceof ValidationError ? 400 : 500
+//           res.status(statut).json({ message: erreur.message, data: erreur.message })
+//         })
+//     })
+//     .catch((erreur) => {
+//       res.status(500).json({ message: `La requête n'a pas abouti.`, data: erreur.message })
+//     })
+// }
+
 module.exports = {
   findAllMangas,
   findAllMangasRawSQL,
@@ -162,4 +196,5 @@ module.exports = {
   updateManga,
   updateMangaWithImg,
   deleteManga,
+  // addMangaToProfilUser,
 }
