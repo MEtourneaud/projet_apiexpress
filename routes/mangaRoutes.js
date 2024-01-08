@@ -9,7 +9,7 @@ const {
   updateManga,
   updateMangaWithImg,
   deleteManga,
-  // addMangaToProfilUser,
+  addMangaToProfileUser,
 } = require("../controllers/mangaControllers")
 const { protect, restrictToOwnUser } = require("../controllers/authControllers")
 const { Manga } = require("../db/sequelizeSetup")
@@ -29,6 +29,6 @@ router
 
 router.route("/withImg/:id").put(protect, restrictToOwnUser(Manga), multer, updateMangaWithImg)
 
-// router.route("/addManga/:userId").post(addMangaToProfilUser)
+router.route("/addMangaToProfile/:id").post(protect, addMangaToProfileUser)
 
 module.exports = router

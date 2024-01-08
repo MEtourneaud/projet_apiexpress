@@ -38,7 +38,8 @@ const login = (req, res) => {
 
 const protect = (req, res, next) => {
   if (!req.headers.authorization) {
-    return res.status(401).json({ message: `Vous n'êtes pas authentifié.` })
+    console.log("Aucune autorisation trouvée dans les en-têtes.")
+    return res.status(401).json({ message: "Vous n'êtes pas authentifié." })
   }
 
   const token = req.headers.authorization.split(" ")[1]
@@ -46,9 +47,11 @@ const protect = (req, res, next) => {
     try {
       const decoded = jwt.verify(token, SECRET_KEY)
       req.username = decoded.data
+      console.log("Utilisateur authentifié :", req.username)
       next()
     } catch (error) {
-      return res.status(403).json({ message: `Le token n'est pas valide.` })
+      console.error("Erreur lors de la vérification du token :", error.message)
+      return res.status(403).json({ message: "Le token n'est pas valide." })
     }
   }
 }

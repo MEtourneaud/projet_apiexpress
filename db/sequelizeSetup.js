@@ -34,13 +34,16 @@ Review.belongsTo(Manga)
 User.hasMany(Review)
 Review.belongsTo(User)
 
+Status.hasMany(Manga)
+Manga.belongsTo(Status)
+
 sequelize
   .sync({ force: true })
   .then(async () => {
     await setRoles(Role)
     await setUsers(User)
-    await setMangas(Manga)
     await setStatus(Status)
+    await setMangas(Manga)
   })
   .catch((error) => {
     console.log(error)

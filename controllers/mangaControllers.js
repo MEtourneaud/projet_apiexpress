@@ -153,39 +153,41 @@ const deleteManga = (req, res) => {
     })
 }
 
-// const addMangaToProfilUser = (req, res) => {
-//   const { userId, mangaId } = req.body
+const addMangaToProfileUser = (req, res) => {
+  console.log("Route /api/manga/addMangaToProfile atteinte")
+  console.log("Paramètres reçus :", req.params)
+  // Récupérez l'utilisateur actuel depuis la base de données
+  User.findOne({ where: { username: req.username } })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ message: `L'utilisateur n'a pas été trouvé.` })
+      }
 
-//   User.findByPk(userId)
-//     .then((user) => {
-//       if (!user) {
-//         return res.status(404).json({ message: `Aucun utilisateur trouvé.` })
-//       }
+      // Récupérez l'ID du manga à partir des paramètres de la route
+      const mangaId = req.params.id
+      console.log("ID du manga :", mangaId)
 
-//       Manga.findByPk(mangaId)
-//         .then((manga) => {
-//           if (!manga) {
-//             return res.status(404).json({ message: `Aucun manga trouvé.` })
-//           }
+      // Vérifiez si le manga existe
+      return Manga.findByPk(mangaId).then((manga) => {
+        console.log("Manga trouvé :", manga)
+        if (!manga) {
+          return res.status(404).json({ message: `Le manga n'a pas été trouvé.` })
+        }
 
-//           // Créez un enregistrement dans la table Commentaire (si c'est la table de relation)
-//           return Comment.create({ UserId: user.id, MangaId: manga.id })
-//         })
-//         .then(() => {
-//           res
-//             .status(201)
-//             .json({ message: `Le manga a bien été ajouté au profil de l'utilisateur.` })
-//         })
-//         .catch((erreur) => {
-//           const statut =
-//             erreur instanceof UniqueConstraintError || erreur instanceof ValidationError ? 400 : 500
-//           res.status(statut).json({ message: erreur.message, data: erreur.message })
-//         })
-//     })
-//     .catch((erreur) => {
-//       res.status(500).json({ message: `La requête n'a pas abouti.`, data: erreur.message })
-//     })
-// }
+        // Ajoutez le manga au profil de l'utilisateur
+        return user.addManga(manga).then(() => {
+          res.status(201).json({ message: "Le manga a bien été ajouté au profil.", data: manga })
+        })
+      })
+    })
+    .catch((error) => {
+      if (error instanceof UniqueConstraintError || error instanceof ValidationError) {
+        return res.status(400).json({ message: error.message })
+      }
+      console.error("Erreur lors de la recherche du manga :", error)
+      res.status(500).json({ message: `Une erreur est survenue.`, data: error.message })
+    })
+}
 
 module.exports = {
   findAllMangas,
@@ -196,5 +198,5 @@ module.exports = {
   updateManga,
   updateMangaWithImg,
   deleteManga,
-  // addMangaToProfilUser,
+  addMangaToProfileUser,
 }
