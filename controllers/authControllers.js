@@ -26,7 +26,7 @@ const login = (req, res) => {
             data: result.username,
           },
           SECRET_KEY,
-          { expiresIn: "10h" }
+          { expiresIn: "2h" }
         )
         res.json({ message: `Login réussi`, data: token })
       })

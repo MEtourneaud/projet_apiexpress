@@ -44,6 +44,33 @@ const mangas = [
     volumeNumber: "20",
     imageUrl: "http://localhost:3000/images/yakusokuNoNeverlandCover.jpg",
   },
+  {
+    title: "One Piece",
+    author: "Oda Eiichiro",
+    synopsis:
+      "Gloire, fortune et puissance, c'est ce que possédait Gold Roger, le tout puissant roi des pirates, avant de mourir sur l'échafaud. Mais ses dernières paroles ont éveillées bien des convoitises, et lança la fabuleuse ère de la piraterie, chacun voulant trouver le fabuleux trésor qu'il disait avoir laissé. Bien des années plus tard, Shanks, un redoutable pirate aux cheveux rouges, rencontre Luffy, un jeune garçon d'une dizaine d'années dans un petit port de pêche. Il veut devenir pirate et le rejoindre, mais Shanks lui répond qu'il est trop jeune. Plus tard, Luffy avalera accidentellement le fruit Gomu Gomu qui rendra son corps élastique, mais aussi maudit par les eaux. Incapable de nager, Luffy ne veut pourtant pas renoncer à son rêve. Pour le consoler lorsqu'il part, Shanks lui offre son chapeau. Luffy jure alors de le rejoindre un jour avec son propre équipage. A 17 ans, Luffy prend la mer dans une petite barque avec pour but de réunir un équipage de pirates, mais de pirates pas comme les autres, qui devront partager sa conception un peu étrange de la piraterie. L'aventure est lancée.",
+    genre: "Action, Aventure, Comédie, Drame, Fantastique",
+    volumeNumber: "106",
+    imageUrl: "http://localhost:3000/images/onePieceCover.jpg",
+  },
+  {
+    title: "Dorohedoro",
+    author: "Q Hayashida",
+    synopsis:
+      "Caiman est un jeune homme dont le visage a été transformé en lézard suite à un sortilège. En compagnie de Nikaido sa jeune amie, il se lance à la poursuite du mage venu de l'autre coté qui lui a lancé ce sort afin de se venger. Mais les choses ne sont pas aussi simples car En, le chef des mages est bien décidé à en finir avec ce lézard qui massacre ses mages et qui n'est pas sensible à leur magie. Aussi il lance à ses trousses, des tueurs : Shin, Noi, Ebisu et Fujita...",
+    genre: "Action, Comédie, Drame, Horreur, Psychologique, Surnaturel",
+    volumeNumber: "23",
+    imageUrl: "http://localhost:3000/images/dorohedoroCover.jpeg",
+  },
+  {
+    title: "Steel Ball Run",
+    author: "Araki Hirohiko",
+    synopsis:
+      "Steel Ball Run : une course de chevaux qui a lieu en 1890 aux États-Unis. Les participants doivent chevaucher de San Diego Beach à New York, ce qui représente une course de 6000 kilomètres sans pouvoir changer de monture ! A la clef, une récompense de 50 millions de dollars !Attirés par cette somme de nombreux individus viennent des 4 coins du mondes, avec chacun leurs propres motivations : jockey en quête de gloire, jeune indien voulant racheter sa terre natale sous le joug de l'envahisseur. Jayro Zeppeli, quant à lui, semble être là pour d'obscures raisons, armé de sphères d'acier, sa présence redonnera à Johnny Joestar la force de se lever de son fauteuil roulant et de faire un pas dans la vie d'adulte !",
+    genre: "Action, Aventure, Drame, Fantastique, Historique, Mystère, Surnaturel, Tragique",
+    volumeNumber: "24",
+    imageUrl: "http://localhost:3000/images/steelBallRunCover.jpg",
+  },
 ]
 
 module.exports = mangas
