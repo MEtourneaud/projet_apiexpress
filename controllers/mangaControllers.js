@@ -84,7 +84,7 @@ const createMangaWithImg = (req, res) => {
         })
         .catch((error) => {
           if (error instanceof UniqueConstraintError || error instanceof ValidationError) {
-            return res.status(400).json({ message: error.message })
+            return res.status(401).json({ message: error.message })
           }
           res.status(500).json({ message: `Le manga n'a pas pu être créé`, data: error.message })
         })
