@@ -117,10 +117,14 @@ const updateMangaWithImg = (req, res) => {
   Manga.findByPk(req.params.id)
     .then((manga) => {
       if (manga) {
+        // Vérifiez si une nouvelle image a été fournie
+        if (req.file) {
+          manga.imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+        }
+
         return manga
           .update({
             ...req.body,
-            imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
           })
           .then(() => {
             res.status(201).json({ message: "Le manga a bien été mis à jour.", data: manga })
