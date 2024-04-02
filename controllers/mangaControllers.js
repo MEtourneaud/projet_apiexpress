@@ -47,30 +47,6 @@ const createManga = (req, res) => {
       if (!user) {
         return res.status(404).json({ message: `L'utilisateur n'a pas été trouvé.` })
       }
-      const newManga = { ...req.body, UserId: user.id }
-
-      Manga.create(newManga)
-        .then((manga) => {
-          res.status(201).json({ message: "Le manga a bien été créé", data: manga })
-        })
-        .catch((error) => {
-          if (error instanceof UniqueConstraintError || error instanceof ValidationError) {
-            return res.status(400).json({ message: error.message })
-          }
-          res.status(500).json({ message: `Le manga n'a pas pu être créé`, data: error.message })
-        })
-    })
-    .catch((error) => {
-      res.status(500).json(error.message)
-    })
-}
-
-const createMangaWithImg = (req, res) => {
-  User.findOne({ where: { username: req.username } })
-    .then((user) => {
-      if (!user) {
-        return res.status(404).json({ message: `L'utilisateur n'a pas été trouvé.` })
-      }
       console.log(req.file)
       const newManga = {
         ...req.body,
@@ -95,25 +71,6 @@ const createMangaWithImg = (req, res) => {
 }
 
 const updateManga = (req, res) => {
-  Manga.findByPk(req.params.id)
-    .then((manga) => {
-      if (manga) {
-        return manga.update(req.body).then(() => {
-          res.status(201).json({ message: "Le manga a bien été mis à jour.", data: manga })
-        })
-      } else {
-        res.status(404).json({ message: `Aucun manga à mettre à jour n'a été trouvé.` })
-      }
-    })
-    .catch((error) => {
-      if (error instanceof UniqueConstraintError || error instanceof ValidationError) {
-        return res.status(400).json({ message: error.message })
-      }
-      res.status(500).json({ message: "Une erreur est survenue.", data: error.message })
-    })
-}
-
-const updateMangaWithImg = (req, res) => {
   Manga.findByPk(req.params.id)
     .then((manga) => {
       if (manga) {
@@ -198,9 +155,7 @@ module.exports = {
   findAllMangasRawSQL,
   findMangaByPk,
   createManga,
-  createMangaWithImg,
   updateManga,
-  updateMangaWithImg,
   deleteManga,
   addMangaToProfileUser,
 }
