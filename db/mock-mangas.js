@@ -1,3 +1,4 @@
+// Définition d'un tableau d'objets représentant des mangas
 const mangas = [
   {
     title: "Gintama",
@@ -73,4 +74,5 @@ const mangas = [
   },
 ]
 
+// Exporte le tableau d'objets représentant des mangas fictifs pour le rendre accessible à d'autres parties de l'application
 module.exports = mangas

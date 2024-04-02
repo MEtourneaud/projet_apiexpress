@@ -27,16 +27,18 @@ const findUserByPk = (req, res) => {
 }
 
 const createUser = (req, res) => {
+  // Hache le mot de passe avant de le sauvegarder
   bcrypt
     .hash(req.body.password, 10)
     .then((hash) => {
       User.create({ ...req.body, password: hash })
         .then((user) => {
-          //mot de passe caché
+          // Masque le mot de passe
           user.password = ""
           res.status(201).json({ message: `L'utilisateur a bien été créé`, data: user })
         })
         .catch((error) => {
+          // Gère les erreurs de validation ou de contrainte unique
           if (error instanceof UniqueConstraintError || error instanceof ValidationError) {
             return res.status(400).json({ message: error.message })
           }
@@ -55,28 +57,30 @@ const updateUser = (req, res) => {
     .then((result) => {
       if (result) {
         if (req.body.password) {
+          // Hache le nouveau mot de passe avant de le sauvegarder
           return bcrypt.hash(req.body.password, 10).then((hash) => {
             req.body.password = hash
 
-            // On empêche l'utilisateur de mettre à jour son username
+            // Empêche l'utilisateur de mettre à jour son nom d'utilisateur
             req.body.username = result.username
 
             return result.update(req.body).then(() => {
               res
                 .status(201)
-                .json({ message: `L'utilisateur a bien été mis à jour.`, data: result })
+                .json({ message: `L'utilisateur a bien été mis à jour.`, data: result }) // Renvoie l'utilisateur mis à jour
             })
           })
         }
       } else {
-        res.status(404).json({ message: `Aucun utilisateur à mettre à jour n'a été trouvé.` })
+        res.status(404).json({ message: `Aucun utilisateur à mettre à jour n'a été trouvé.` }) // Gère le cas où aucun utilisateur n'est trouvé
       }
     })
     .catch((error) => {
+      // Gère les erreurs de validation ou de contrainte unique
       if (error instanceof UniqueConstraintError || error instanceof ValidationError) {
         return res.status(400).json({ message: error.message })
       }
-      res.status(500).json({ message: "Une erreur est survenue.", data: error.message })
+      res.status(500).json({ message: "Une erreur est survenue.", data: error.message }) // Gère les autres erreurs
     })
 }
 

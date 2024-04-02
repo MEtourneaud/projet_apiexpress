@@ -8,14 +8,14 @@ const {
   deleteReview,
 } = require("../controllers/reviewControllers")
 const { protect, restrictToOwnUser } = require("../controllers/authControllers")
-const { Comment } = require("../db/sequelizeSetup")
+const { Review } = require("../db/sequelizeSetup")
 
 router.route("/").get(findAllReviews).post(protect, createReview)
 
 router
   .route("/:id")
   .get(findReviewByPk)
-  .put(protect, restrictToOwnUser(Comment), updateReview)
-  .delete(protect, restrictToOwnUser(Comment), deleteReview)
+  .put(protect, restrictToOwnUser(Review), updateReview)
+  .delete(protect, restrictToOwnUser(Review), deleteReview)
 
 module.exports = router
