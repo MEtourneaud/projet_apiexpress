@@ -35,7 +35,8 @@ const login = (req, res) => {
         // Si le mot de passe est valide, génère un jeton JWT pour l'utilisateur
         const token = jwt.sign(
           {
-            data: result.username,
+            id: result.id, // Ajoutez l'identifiant de l'utilisateur
+            username: result.username,
           },
           SECRET_KEY,
           { expiresIn: "2h" }

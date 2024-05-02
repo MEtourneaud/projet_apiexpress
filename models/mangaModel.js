@@ -40,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       // Colonne "imageUrl": URL de l'image du manga
       imageUrl: {
         type: DataTypes.STRING,
+        unique: true, // Ajout de la contrainte d'unicité
       },
     },
     {
