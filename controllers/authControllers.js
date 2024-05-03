@@ -19,34 +19,38 @@ const rolesHierarchy = {
 
 // Fonction pour gérer le processus de connexion des utilisateurs
 const login = (req, res) => {
-  // Récupère l'utilisateur avec le mot de passe depuis la base de données
+  const { username, password } = req.body
+
   User.scope("withPassword")
-    .findOne({ where: { username: req.body.username } })
-    .then((result) => {
-      // Vérifie si l'utilisateur existe
-      if (!result) {
-        return res.status(404).json({ message: `Le nom d'utilisateur n'existe pas.` })
+    .findOne({ where: { username } })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ message: "Utilisateur non trouvé" })
       }
-      // Compare le mot de passe fourni avec le mot de passe haché de l'utilisateur
-      return bcrypt.compare(req.body.password, result.password).then((isValid) => {
+
+      bcrypt.compare(password, user.password).then((isValid) => {
         if (!isValid) {
-          return res.status(401).json({ message: `Le mot de passe n'est pas valide.` })
+          return res.status(401).json({ message: "Mot de passe incorrect" })
         }
-        // Si le mot de passe est valide, génère un jeton JWT pour l'utilisateur
-        const token = jwt.sign(
-          {
-            id: result.id, // Ajoutez l'identifiant de l'utilisateur
-            username: result.username,
-          },
-          SECRET_KEY,
-          { expiresIn: "2h" }
-        )
-        // Renvoie le jeton JWT dans la réponse
-        res.json({ message: `Login réussi`, data: token })
+
+        // Récupérer le rôle de l'utilisateur
+        Role.findByPk(user.RoleId).then((role) => {
+          const token = jwt.sign(
+            {
+              id: user.id,
+              username: user.username,
+              roles: [role.label], // Inclure le rôle dans le JWT
+            },
+            SECRET_KEY,
+            { expiresIn: "2h" }
+          )
+
+          res.json({ message: "Connexion réussie", data: token })
+        })
       })
     })
     .catch((error) => {
-      res.status(500).json({ data: error.message })
+      res.status(500).json({ message: "Erreur interne" })
     })
 }
 
