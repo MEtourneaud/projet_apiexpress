@@ -56,26 +56,22 @@ const login = (req, res) => {
 
 // Fonction middleware pour protéger les routes nécessitant une authentification
 const protect = (req, res, next) => {
-  // Vérifie si le jeton JWT est présent dans les en-têtes de la requête
-  if (!req.headers.authorization) {
-    console.log("Aucune autorisation trouvée dans les en-têtes.")
+  const authHeader = req.headers.authorization // Récupérez l'en-tête d'autorisation
+  if (!authHeader) {
     return res.status(401).json({ message: "Vous n'êtes pas authentifié." })
   }
 
-  // Extrait le jeton JWT des en-têtes de la requête
-  const token = req.headers.authorization.split(" ")[1]
-  if (token) {
-    try {
-      // Vérifie et décode le jeton JWT
-      const decoded = jwt.verify(token, SECRET_KEY)
-      // Ajoute le nom d'utilisateur décodé à l'objet req pour une utilisation ultérieure
-      req.username = decoded.data
-      console.log("Utilisateur authentifié :", req.username)
-      next() // Passe à la prochaine fonction middleware
-    } catch (error) {
-      console.error("Erreur lors de la vérification du token :", error.message)
-      return res.status(403).json({ message: "Le token n'est pas valide." })
-    }
+  const token = authHeader.split(" ")[1] // Obtenez le JWT
+  if (!token) {
+    return res.status(401).json({ message: "Le token d'authentification est manquant." })
+  }
+
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY) // Vérifiez et décodez le JWT
+    req.username = decoded.username // Définissez le `username`
+    next() // Passez au contrôleur suivant
+  } catch (error) {
+    return res.status(403).json({ message: "Le token n'est pas valide." })
   }
 }
 
