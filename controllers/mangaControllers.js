@@ -79,8 +79,6 @@ const createManga = (req, res) => {
 
 // Fonction pour mettre à jour un manga existant
 const updateManga = (req, res) => {
-  console.log("Requête de mise à jour reçue:", req.file)
-  console.log("Requête de mise à jour reçue (fichier image):", req.file) // Si vous téléchargez également une image, affichez les détails du fichier
   Manga.findByPk(req.params.id)
     .then((manga) => {
       if (manga) {
@@ -91,22 +89,33 @@ const updateManga = (req, res) => {
         // }
 
         // Vérifiez les données transmises à la méthode update
-        console.log("Données transmises à la méthode update:", req.body)
+        //console.log("Données transmises à la méthode update:", req.body)
 
-        console.log("Avant l'appel à la méthode update")
+        //console.log("Avant l'appel à la méthode update")
 
         // Imprimez également les données de l'objet manga avant la mise à jour
-        console.log("Données de l'objet manga avant la mise à jour:", manga)
+        //console.log("Données de l'objet manga avant la mise à jour:", manga)
+
+        // créer un objet qui contient req.body
+        // et l'image uniquement si elle a été envoyyée
+
+        let imageUrl = manga.imageUrl
+
+        if (req.file) {
+          imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+        }
+
+        const mangaUpdate = {
+          ...req.body,
+          imageUrl,
+        }
 
         return manga
-          .update({
-            ...req.body,
-            imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-          })
+          .update(mangaUpdate)
           .then(() => {
-            console.log("Après l'appel à la méthode update")
+            //console.log("Après l'appel à la méthode update")
             // Imprimez les données de l'objet manga après la mise à jour
-            console.log("Données de l'objet manga après la mise à jour:", manga)
+            //console.log("Données de l'objet manga après la mise à jour:", manga)
             res.status(201).json({ message: "Le manga a bien été mis à jour.", data: manga }) // Renvoie le manga mis à jour
           })
           .catch((error) => {
