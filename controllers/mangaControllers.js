@@ -85,10 +85,10 @@ const updateManga = (req, res) => {
     .then((manga) => {
       if (manga) {
         // Vérifie si une nouvelle image a été fournie
-        if (req.file) {
-          manga.imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-          console.log("URL de l'image dans l'objet manga:", manga.imageUrl)
-        }
+        // if (req.file) {
+        //   manga.imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+        //   console.log("URL de l'image dans l'objet manga:", manga.imageUrl)
+        // }
 
         // Vérifiez les données transmises à la méthode update
         console.log("Données transmises à la méthode update:", req.body)
@@ -101,6 +101,7 @@ const updateManga = (req, res) => {
         return manga
           .update({
             ...req.body,
+            imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
           })
           .then(() => {
             console.log("Après l'appel à la méthode update")
