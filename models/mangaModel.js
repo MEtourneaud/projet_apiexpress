@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       // Colonne "title": Titre du manga
       title: {
-        type: DataTypes.STRING, // Type de données: chaîne de caractères
+        type: DataTypes.TEXT, // Type de données: chaîne de caractères
         allowNull: false, // Ne peut pas être nul
         unique: {
           msg: "Le nom est déjà pris", // Message d'erreur si la contrainte d'unicité échoue
