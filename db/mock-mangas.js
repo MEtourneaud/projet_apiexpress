@@ -72,6 +72,42 @@ const mangas = [
     volumeNumber: "24",
     imageUrl: "http://localhost:3000/images/steelBallRunCover.jpg",
   },
+  {
+    title: "Tensei Shitara Slime Datta Ken",
+    author: "Fuse",
+    synopsis:
+      "Satoru Minami, un simple homme de 37 ans, se réincarne en slime dans une grotte d'un monde fantastique après sa mort provoquée par un voleur en fuite. Alors qu'il tente de percer le secret derrière cette nouvelle vie, Satoru fait la connaissance de Veldra, le dragon de la tempête, une créature qui a perdu la capacité de se mouvoir depuis qu'une héroïne a scellé son corps à la roche de la caverne 300 ans auparavant. Malgré leur différence de force frappante, ils décident de devenir amis et à la requête du dragon, doivent se donner l'un l'autre un surnom : ainsi, Veldra se voit attribuer le nom de famille Tempest et devient donc Veldra Tempest, Satoru, lui se transforme en Limule Tempest. Cependant, est-il bien sage de s'allier à un dragon ?",
+    genre: "Action,  Aventure, Comédie, Drame, Ecchi, Fantasy, Isekai",
+    volumeNumber: "23",
+    imageUrl: "http://localhost:3000/images/tenseiShitaraSlimeDattaKenCover.webp",
+  },
+  {
+    title: "Dr. STONE",
+    author: " Inagaki Riichiro",
+    synopsis:
+      "Un jour, une lumière éclaira la Terre, changeant tous les humains en pierre. Ainsi, l'humanité s'éteignit. Plusieurs millénaires plus tard, Taiju parvient à s'échapper de son enveloppe de pierre pour découvrir un monde dans lequel la nature a repris ses droits. Avec son ami Senku, ils décident de tout mettre en œuvres pour faire renaître l'humanité de ses cendres et survivre.",
+    genre: "Action, Aventure, Drame, Fantastique, Science-fiction",
+    volumeNumber: "26",
+    imageUrl: "http://localhost:3000/images/drStoneCover.webp",
+  },
+  {
+    title: "Fullmetal Alchemist",
+    author: "Arakawa Hiromu",
+    synopsis:
+      "À Amestris, un immense pays, l'armée tient une place très importante puisque son dirigeant, King Bradley, est également le président du pays. Cette armée est soutenue par des alchimistes, les Alchimistes d'État dont le plus jeune, Edward Elric, a pour spécialité le métal. On le surnomme le Fullmetal Alchemist. Edward a tout juste 15 ans, et parcourt le pays en compagnie de son frère, Alphonse, à la recherche de la Pierre Philosophale. Il a pour but de rendre son corps à son frère, car Alphonse n'est qu'une âme rattaché à une armure par un sceau de sang. Étant plus jeunes, ils ont essayé de redonner vie à leur mère grâce à l'alchimie, mais la tentative fut un échec cuisant, et Alphonse perdit son corps. Edward garde lui aussi des séquelles de leur tentative, puisqu'il a le bras droit et la jambe gauche en métal. Mais la quête des deux frères risque de les mener vers une vérité plus terrible qu'ils ne l'imaginaient.",
+    genre: "Action, Comédie, Drame, Mystère, Surnaturel",
+    volumeNumber: "27",
+    imageUrl: "http://localhost:3000/images/fullmetalAlchemistCover.jpg",
+  },
+  {
+    title: "Berserk",
+    author: " Miura Kentaro",
+    synopsis:
+      "Dans un monde médiéval et marqué par un passé difficile, erre un mercenaire solitaire nommé Guts, décidé à être seul maître de son destin. Autrefois contraint par un pari perdu à rejoindre les Faucons, une troupe de mercenaires dirigés par Griffith, Guts fut acteur de nombreux combats sanglants et témoin de sombres intrigues politiques. Mais il réalisa soudain que la fatalité n'existe pas et qu'il pouvait reprendre sa liberté s'il le désirait vraiment... Mais un mal le traque sans relâche.",
+    genre: "Action, Fantastique, Horreur, Tragique",
+    volumeNumber: "41",
+    imageUrl: "http://localhost:3000/images/berserkCover.jpeg",
+  },
 ]
 
 // Exporte le tableau d'objets représentant des mangas fictifs pour le rendre accessible à d'autres parties de l'application
