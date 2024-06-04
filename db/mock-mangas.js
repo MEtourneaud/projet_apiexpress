@@ -37,7 +37,7 @@ const mangas = [
     imageUrl: "http://localhost:3000/images/chainsawManCover.jpg",
   },
   {
-    title: "Yakusoku no Neverland",
+    title: "The Promised Neverland",
     author: "Shirai Kaiu",
     synopsis:
       "Emma et ses amis, tous orphelins, ont été placés dans un établissement spécialisé lorsqu'ils étaient tout jeune. Bien que leur liberté soit limitée et que les règles soient parfois un peu strictes, ils mènent une vie agréable tous ensemble et la femme qui s'occupe d'eux est généreuse. Cependant, une question anime Emma et tous les autres : pourquoi n'ont-ils pas le droit de sortir de l'orphelinat ?",
@@ -73,7 +73,7 @@ const mangas = [
     imageUrl: "http://localhost:3000/images/steelBallRunCover.jpg",
   },
   {
-    title: "Tensei Shitara Slime Datta Ken",
+    title: "Moi, quand je me réincarne en Slime",
     author: "Fuse",
     synopsis:
       "Satoru Minami, un simple homme de 37 ans, se réincarne en slime dans une grotte d'un monde fantastique après sa mort provoquée par un voleur en fuite. Alors qu'il tente de percer le secret derrière cette nouvelle vie, Satoru fait la connaissance de Veldra, le dragon de la tempête, une créature qui a perdu la capacité de se mouvoir depuis qu'une héroïne a scellé son corps à la roche de la caverne 300 ans auparavant. Malgré leur différence de force frappante, ils décident de devenir amis et à la requête du dragon, doivent se donner l'un l'autre un surnom : ainsi, Veldra se voit attribuer le nom de famille Tempest et devient donc Veldra Tempest, Satoru, lui se transforme en Limule Tempest. Cependant, est-il bien sage de s'allier à un dragon ?",

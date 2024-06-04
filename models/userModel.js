@@ -27,6 +27,16 @@ module.exports = (sequelize, DataTypes) => {
       password: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          len: {
+            args: [8, 100], // minimum 8 caractères, maximum 100 caractères
+            msg: "Le mot de passe doit contenir entre 8 et 100 caractères.",
+          },
+          is: {
+            args: /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,100}$/,
+            msg: "Le mot de passe doit contenir au moins une majuscule et un caractère spécial.",
+          },
+        },
       },
     },
     {
