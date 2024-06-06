@@ -19,37 +19,45 @@ const rolesHierarchy = {
 
 // Fonction pour gérer le processus de connexion des utilisateurs
 const login = (req, res) => {
+  // Extraction des données de la requête
   const { username, password } = req.body
 
+  // Recherche de l'utilisateur avec le champ 'username' et inclusion du mot de passe
   User.scope("withPassword")
     .findOne({ where: { username } })
     .then((user) => {
+      // Si l'utilisateur n'est pas trouvé, renvoyer une réponse avec un statut 404
       if (!user) {
         return res.status(404).json({ message: "Utilisateur non trouvé" })
       }
 
+      // Comparaison du mot de passe fourni avec celui stocké dans la base de données
       bcrypt.compare(password, user.password).then((isValid) => {
+        // Si le mot de passe est incorrect, renvoyer une réponse avec un statut 401
         if (!isValid) {
           return res.status(401).json({ message: "Mot de passe incorrect" })
         }
 
-        // Récupérer le rôle de l'utilisateur
+        // Récupérer le rôle de l'utilisateur à partir de son ID
         Role.findByPk(user.RoleId).then((role) => {
+          // Création d'un token JWT avec les informations de l'utilisateur et son rôle
           const token = jwt.sign(
             {
               id: user.id,
               username: user.username,
-              roles: [role.label], // Inclure le rôle dans le JWT
+              roles: [role.label],
             },
-            SECRET_KEY,
-            { expiresIn: "2h" }
+            SECRET_KEY, // Clé secrète pour signer le JWT
+            { expiresIn: "2h" } // Le token expire dans 2 heures
           )
 
+          // Renvoyer une réponse avec un message de succès et le token
           res.json({ message: "Connexion réussie", data: token })
         })
       })
     })
     .catch((error) => {
+      // Gestion des erreurs et renvoi d'une réponse avec un statut 500
       res.status(500).json({ message: "Erreur interne" })
     })
 }
@@ -58,11 +66,13 @@ const login = (req, res) => {
 const protect = (req, res, next) => {
   const authHeader = req.headers.authorization // Récupérez l'en-tête d'autorisation
   if (!authHeader) {
+    // Si l'en-tête d'autorisation est manquant, renvoyer une réponse avec un statut 401
     return res.status(401).json({ message: "Vous n'êtes pas authentifié." })
   }
 
   const token = authHeader.split(" ")[1] // Obtenez le JWT
   if (!token) {
+    // Si le token est manquant, renvoyer une réponse avec un statut 401
     return res.status(401).json({ message: "Le token d'authentification est manquant." })
   }
 

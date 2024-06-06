@@ -17,12 +17,6 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      // mail: {
-      //   type: DataTypes.STRING,
-      //   validate: {
-      //     isEmail: true,
-      //   },
-      // },
       // Colonne "password": Mot de passe de l'utilisateur
       password: {
         type: DataTypes.STRING,
@@ -32,10 +26,14 @@ module.exports = (sequelize, DataTypes) => {
             args: [8, 100], // minimum 8 caractères, maximum 100 caractères
             msg: "Le mot de passe doit contenir entre 8 et 100 caractères.",
           },
-          // is: {
-          //   args: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,100}$/,
-          //   msg: "Le mot de passe doit contenir au moins une majuscule, un chiffre et un caractère spécial.",
-          // },
+          isValidPassword(value) {
+            const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,100}$/
+            if (!regex.test(value)) {
+              throw new Error(
+                "Le mot de passe doit contenir au moins une majuscule, un chiffre et un caractère spécial."
+              )
+            }
+          },
         },
       },
     },

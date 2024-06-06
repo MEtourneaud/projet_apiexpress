@@ -27,28 +27,28 @@ const findUserByPk = (req, res) => {
 }
 
 const createUser = (req, res) => {
-  // Hache le mot de passe avant de le sauvegarder
-  bcrypt
-    .hash(req.body.password, 10)
+  const { username, password, RoleId } = req.body
+
+  // Crée un utilisateur en premier pour vérifier les validations sans hachage
+  User.build({ username, password, RoleId })
+    .validate()
+    .then(() => {
+      // Si la validation réussit, hache le mot de passe et crée l'utilisateur
+      return bcrypt.hash(password, 10)
+    })
     .then((hash) => {
-      User.create({ ...req.body, password: hash })
-        .then((user) => {
-          // Masque le mot de passe
-          user.password = ""
-          res.status(201).json({ message: `L'utilisateur a bien été créé`, data: user })
-        })
-        .catch((error) => {
-          // Gère les erreurs de validation ou de contrainte unique
-          if (error instanceof UniqueConstraintError || error instanceof ValidationError) {
-            return res.status(400).json({ message: error.message })
-          }
-          res
-            .status(500)
-            .json({ message: `L'utilisateur n'a pas pu être créé`, data: error.message })
-        })
+      return User.create({ username, password: hash, RoleId })
+    })
+    .then((user) => {
+      user.password = ""
+      res.status(201).json({ message: `L'utilisateur a bien été créé`, data: user })
     })
     .catch((error) => {
-      console.log(error.message)
+      console.error("Erreur lors de la création de l'utilisateur :", error)
+      if (error instanceof UniqueConstraintError || error instanceof ValidationError) {
+        return res.status(400).json({ message: error.message })
+      }
+      res.status(500).json({ message: `L'utilisateur n'a pas pu être créé`, data: error.message })
     })
 }
 

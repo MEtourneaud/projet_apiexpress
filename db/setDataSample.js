@@ -43,16 +43,4 @@ const setMangas = (Manga) => {
   )
 }
 
-// Fonction pour créer des statuts dans la base de données
-const setStatus = (Status) => {
-  return Promise.all([
-    // Crée cinq statuts avec les étiquettes spécifiées
-    Status.create({ status: "Completed" }),
-    Status.create({ status: "Reading" }),
-    Status.create({ status: "On hold" }),
-    Status.create({ status: "Dropped" }),
-    Status.create({ status: "Plan to read" }),
-  ])
-}
-
-module.exports = { setUsers, setRoles, setMangas, setStatus }
+module.exports = { setUsers, setRoles, setMangas }
