@@ -27,8 +27,11 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Le mot de passe doit contenir entre 8 et 100 caractères.",
           },
           isValidPassword(value) {
+            // Définir une expression régulière pour valider le mot de passe
             const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,100}$/
+            // Tester la valeur du mot de passe contre l'expression régulière
             if (!regex.test(value)) {
+              // Si la valeur ne correspond pas à l'expression régulière, affiche une erreur avec un message descriptif
               throw new Error(
                 "Le mot de passe doit contenir au moins une majuscule, un chiffre et un caractère spécial."
               )

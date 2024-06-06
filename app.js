@@ -30,12 +30,12 @@ app.use("/api/reviews", reviewRouter) // Utilisation du routeur des avis avec le
 
 app.use("/images", express.static(__dirname + "/images")) // Middleware pour servir les fichiers statiques depuis le répertoire "images"
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`) // Démarrage du serveur et affichage d'un message dans la console
-})
-
 // Middleware de gestion des erreurs
 app.use((err, req, res, next) => {
   console.error(err.stack) // Affichage de l'erreur dans la console
   res.status(500).send("Something went wrong!") // Réponse avec le code d'erreur 500 et un message générique
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`) // Démarrage du serveur et affichage d'un message dans la console
 })
