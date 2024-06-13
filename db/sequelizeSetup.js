@@ -1,29 +1,29 @@
-// Importe les classes Sequelize et DataTypes depuis le module "sequelize"
+// Importation des classes Sequelize et DataTypes depuis le module "sequelize"
 const { Sequelize, DataTypes } = require("sequelize")
 
-// Importe les modèles de différentes entités
+// Importation des modèles de différentes entités
 const RoleModel = require("../models/roleModel")
 const UserModel = require("../models/userModel")
 const MangaModel = require("../models/mangaModel")
 const ReviewModel = require("../models/reviewModel")
 
-// Importe des fonctions de réglage des données d'échantillonnage depuis un fichier nommé "setDataSample"
+// Importation des données d'échantillonnage
 const { setUsers, setRoles, setMangas } = require("./setDataSample")
 
-// Initialise une nouvelle instance de Sequelize pour se connecter à la base de données avec les paramètres spécifiés
+// Initialisation de Sequelize pour se connecter à la base de données
 const sequelize = new Sequelize("projet_mangas", "root", "", {
   host: "localhost",
   dialect: "mariadb",
   logging: false,
 })
 
-// Instancie un Model qui permettra d'interpréter le Javascript avec la Table SQL correspondante
+// Instanciation des modèles
 const Role = RoleModel(sequelize, DataTypes)
 const User = UserModel(sequelize, DataTypes)
 const Manga = MangaModel(sequelize, DataTypes)
 const Review = ReviewModel(sequelize, DataTypes)
 
-// Définit les relations entre les entités en utilisant les méthodes Sequelize
+// Définition des relations entre les modèles
 Role.hasMany(User)
 User.belongsTo(Role)
 
@@ -40,7 +40,7 @@ Review.belongsTo(Manga)
 User.hasMany(Review)
 Review.belongsTo(User)
 
-// Synchronise les modèle avec la base de données et crée les tables si elles n'existent pas déjà
+// Synchronisation des modèles avec la base de données
 sequelize
   .sync({ force: true })
   .then(async () => {
@@ -52,11 +52,11 @@ sequelize
     console.log(error)
   })
 
-// Vérifie la connexion à la base de données
+// Vérification de la connexion à la base de données
 sequelize
   .authenticate()
   .then(() => console.log("La connexion à la base de données a bien été établie."))
   .catch((error) => console.error(`Impossible de se connecter à la base de données ${error}`))
 
-// Exporte les instances de modèles et l'instance Sequelize pour les rendre disponibles dans d'autres fichiers
+// Exportation des instances de modèles et de l'instance Sequelize
 module.exports = { User, Role, Manga, Review, sequelize }
